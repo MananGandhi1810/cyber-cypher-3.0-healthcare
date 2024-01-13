@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../constants/app_colors.dart';
 import 'splash_screen.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -51,67 +52,206 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.blue,
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(48.0),
             child: Form(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    const Text('Register'),
-                    TextFormField(
-                      controller: _nameController,
-                      decoration: const InputDecoration(
-                        labelText: 'Name',
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    child: const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Welcome!',
+                          style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.yellow,
+                          ),
+                        ),
+                        Text(
+                          "Your health is our priority",
+                          style: TextStyle(
+                            fontSize: 19,
+                            color: Colors.yellow,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Padding(padding: EdgeInsets.all(10)),
+                  TextFormField(
+                    controller: _nameController,
+                    decoration: const InputDecoration(
+                      hintText: 'Name',
+                      hintStyle: TextStyle(
+                        color: Colors.grey,
                       ),
-                    ),
-                    TextFormField(
-                      controller: _emailController,
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                        ),
                       ),
+                      fillColor: Colors.white,
                     ),
-                    TextFormField(
-                      controller: _passwordController,
-                      decoration: const InputDecoration(
-                        labelText: 'Password',
+                  ),
+                  const Padding(padding: EdgeInsets.all(10)),
+                  TextFormField(
+                    controller: _emailController,
+                    decoration: const InputDecoration(
+                      hintText: 'Email',
+                      hintStyle: TextStyle(
+                        color: Colors.grey,
                       ),
-                    ),
-                    TextFormField(
-                      controller: _phoneController,
-                      decoration: const InputDecoration(
-                        labelText: 'Phone',
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                        ),
                       ),
+                      fillColor: Colors.white,
                     ),
-                    RadioListTile(
-                      title: const Text('Doctor'),
-                      value: 'doctor',
-                      groupValue: _role,
-                      onChanged: (value) {
-                        setState(() {
-                          _role = 'doctor';
-                        });
-                      },
+                  ),
+                  const Padding(padding: EdgeInsets.all(10)),
+                  TextFormField(
+                    controller: _phoneController,
+                    decoration: const InputDecoration(
+                      hintText: 'Phone Number',
+                      hintStyle: TextStyle(
+                        color: Colors.grey,
+                      ),
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                        ),
+                      ),
+                      fillColor: Colors.white,
                     ),
-                    RadioListTile(
-                      title: const Text('Patient'),
-                      value: 'patient',
-                      groupValue: _role,
-                      onChanged: (value) {
-                        setState(() {
-                          _role = 'patient';
-                        });
-                      },
+                  ),
+                  const Padding(padding: EdgeInsets.all(10)),
+                  TextFormField(
+                    controller: _passwordController,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      hintText: 'Password',
+                      hintStyle: TextStyle(
+                        color: Colors.grey,
+                      ),
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                        ),
+                      ),
+                      fillColor: Colors.white,
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        _register();
-                      },
-                      child: const Text('Register'),
-                    ),
-                  ],
-                ),
+                  ),
+                  const Padding(padding: EdgeInsets.all(10)),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _role = 'patient';
+                            });
+                            _register();
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: _role == 'patient'
+                                      ? Colors.yellow
+                                      : Colors.transparent,
+                                  width: 2,
+                                ),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              child: const Column(children: [
+                                Icon(
+                                  Icons.person,
+                                  color: Colors.white,
+                                  size: 75,
+                                ),
+                                Text(
+                                  'Patient',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ]),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _role = 'doctor';
+                            });
+                            _register();
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: _role == 'doctor'
+                                      ? Colors.yellow
+                                      : Colors.transparent,
+                                  width: 2,
+                                ),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              child: const Column(
+                                children: [
+                                  Icon(
+                                    Icons.medical_services,
+                                    color: Colors.white,
+                                    size: 75,
+                                  ),
+                                  Text(
+                                    'Doctor',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),

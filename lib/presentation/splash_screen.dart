@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cyber_cypher_healthcare/presentation/get_doctor_data_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'get_data_screen.dart';
+import 'get_user_data_screen.dart';
 import 'home_screen.dart';
 import 'login_screen.dart';
 
@@ -37,12 +38,23 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             );
           } else {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const GetDataScreen(),
-              ),
-            );
+            firestore.collection("users").doc(user.uid).get().then((value) {
+              if (value.data()!["role"] == "patient") {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const GetUserDataScreen(),
+                  ),
+                );
+              } else {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const GetDoctorDataScreen(),
+                  ),
+                );
+              }
+            });
           }
         });
       }

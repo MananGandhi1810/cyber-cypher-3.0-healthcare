@@ -1,6 +1,7 @@
 import 'package:cyber_cypher_healthcare/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'presentation/splash_screen.dart';
 
@@ -18,7 +19,7 @@ class RootApp extends StatelessWidget {
     return MaterialApp(
       title: 'Healthcare App',
       theme: ThemeData(
-        fontFamily: GoogleFonts.monteserrat().fontFamily,
+        fontFamily: GoogleFonts.montserrat().fontFamily,
       ),
       home: const SplashScreen(),
     );
