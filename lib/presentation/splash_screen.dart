@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
         );
       } else {
-        firestore.collection('users').doc(user.uid).collection("data").doc("physical_data").get().then((value) {
+        firestore.collection('users').doc(user.uid).collection("data").doc("data").get().then((value) {
           if (value.exists) {
             Navigator.pushReplacement(
               context,

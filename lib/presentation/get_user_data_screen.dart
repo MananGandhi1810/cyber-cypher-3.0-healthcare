@@ -31,7 +31,7 @@ class _GetUserDataScreenState extends State<GetUserDataScreen> {
         .collection("users")
         .doc(auth.currentUser!.uid)
         .collection("data")
-        .doc("physical_data")
+        .doc("data")
         .set({
       "age": _ageController.text,
       "height": _heightController.text,
